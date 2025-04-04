@@ -1,0 +1,19 @@
+services:
+  api:
+    container_name: aps-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+
+  db:
+    container_name: mssql
+    image: mcr.microsoft.com/mssql/server:2019-CU18-ubuntu-20.04
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=!Sys@dmin1
+    ports:
+      - "1433:1433"
+    volumes:
+      - ./mssql-data:/var/opt/mssql/data
